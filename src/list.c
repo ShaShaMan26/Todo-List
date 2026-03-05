@@ -1,24 +1,28 @@
 #include <stdio.h>
 #include "list.h"
 
-int getSize(List_t* l) {
+//int getSize(List_t* l) {
 	// return sizeof(l->entries) / sizeof(l->entries[0]); need to rethink cuz mem and shit
-	return 0;
-}
+//	return 0;
+//}
 
-void resize(List_t* l) {
-	Entry_t en[getSize(l) + 10];
-	for (int i = 0; i < l->length; en[i] = l->entries[i], i++);
+// void resize(List_t* l) {
+// 	Entry_t en[getSize(l) + 10];
+//	for (int i = 0; i < l->length; en[i] = l->entries[i], i++);
 	// l->entries = en; fix cuz mem stuff
-}
+//}
 
 int badIndex(List_t* l, int i) {
 	return i < 0 || i >= l->length;
 }
 
 void add(List_t* l, Entry_t* e) {
-	l->entries[l->length] = *e;
-	if (++(l->length) >= getSize(l)) resize(l);
+	if (l->length > ENTRIES_SIZE) {
+		// print err
+		return;
+	}
+	l->entries[l->length++] = *e;
+	// if (++(l->length) >= getSize(l)) resize(l);
 }
 
 void del(List_t* l, int i) {
@@ -51,6 +55,10 @@ void move(List_t* l, int i, int j) {
 
 void dispList(List_t* l) {
 	printf("%s\n%s\n", l->title, l->desc);
+	if (l->length < 1) {
+		printf("[!] No entries found.\n");
+		return;
+	}
 	for (int i = 0; i < l->length; i++) printf("[%d] %s\n", i, l->entries[i].title);
 }
 
