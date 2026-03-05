@@ -6,19 +6,20 @@ src = ./src
 inc = ./include
 bin = ./bin
 
-build: entry.o list.o global.o main.o
-	$(cc) $(bin)/entry.o $(bin)/list.o $(bin)/global.o $(bin)/main.o -o $(bin)/todo
+build: input.o entry.o list.o global.o main.o
+	$(cc) $(bin)/input.o $(bin)/entry.o $(bin)/list.o $(bin)/global.o $(bin)/main.o -o $(bin)/todo
 
 run:
 	@$(MAKE) build
 	@./bin/todo
 
-dbuild: dentry.o dlist.o dglobal.o dmain.o
-	$(cc) $(bin)/dentry.o $(bin)/dlist.o $(bin)/dglobal.o $(bin)/dmain.o -o $(bin)/dtodo
+dbuild: dinput.o dentry.o dlist.o dglobal.o dmain.o
+	$(cc) $(bin)/dinput.o $(bin)/dentry.o $(bin)/dlist.o $(bin)/dglobal.o $(bin)/dmain.o -o $(bin)/dtodo
 
 drun:
 	@$(MAKE) dbuild
 	@./bin/dtodo
+
 
 main.o: $(inc)/main.h $(src)/main.c
 	$(cc) $(cflags) $(inc)/main.h $(src)/main.c -o $(bin)/main.o $(ipath)
@@ -32,6 +33,9 @@ entry.o: $(inc)/entry.h $(src)/entry.c
 list.o: $(inc)/list.h $(src)/list.c
 	$(cc) $(cflags) $(inc)/list.h $(src)/list.c -o $(bin)/list.o $(ipath)
 
+input.o: $(inc)/input.h $(src)/input.c
+	$(cc) $(cflags) $(inc)/input.h $(src)/input.c -o $(bin)/input.o $(ipath)
+
 dmain.o: $(inc)/main.h $(src)/main.c
 	$(cc) $(cdflags) $(inc)/main.h $(src)/main.c -o $(bin)/dmain.o $(ipath)
 
@@ -43,4 +47,7 @@ dentry.o: $(inc)/entry.h $(src)/entry.c
 
 dlist.o: $(inc)/list.h $(src)/list.c
 	$(cc) $(cdflags) $(inc)/list.h $(src)/list.c -o $(bin)/dlist.o $(ipath)
+
+dinput.o: $(inc)/input.h $(src)/input.c
+	$(cc) $(cdflags) $(inc)/input.h $(src)/input.c -o $(bin)/dinput.o $(ipath)
 

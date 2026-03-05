@@ -1,3 +1,5 @@
+#include "input.h"
+
 typedef struct {
 	char title[51];
 	char desc[101];

@@ -14,7 +14,7 @@ void run(Global_t* g) {
 	}
 
 	printf("Enter command: \n");
-	char c = getchar();
+	char c = collectChar();
 	
 	// global
 	switch (c) {
