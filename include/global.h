@@ -4,11 +4,11 @@ typedef struct {
 	int running;
 	int inList;
 	
-	List_t lists[];
-	int length;
-
 	Global_t prevState;
 	GLobal_t succState;
+	
+	int length;
+	List_t lists[];
 } Global_t;
 
 int getSize(Global_t* g);
