@@ -4,8 +4,8 @@ typedef struct {
 	int running;
 	int inList;
 	
-	Global_t prevState;
-	GLobal_t succState;
+	// Global_t prevState; fix self-ref issue
+	// Global_t succState;
 	
 	int length;
 	List_t lists[];
@@ -13,4 +13,11 @@ typedef struct {
 
 int getSize(Global_t* g);
 void resize(Global_t* g);
+int badIndex(Global_t* g, int i);
+void add(Global_t* g, List_t* l);
+void del(Global_t* g, int i);
+void complete(Global_t* g, int i);
+void move(Global_t* g, int i, int j);
+void dispLists(Global_t* g);
+void run(Global_t* g);
 

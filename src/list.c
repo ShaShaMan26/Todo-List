@@ -2,7 +2,8 @@
 #include "list.h"
 
 int getSize(List_t* l) {
-	return sizeof(*l) / sizeof(l->entries[0]);
+	// return sizeof(l->entries) / sizeof(l->entries[0]); need to rethink cuz mem and shit
+	return 0;
 }
 
 void resize(List_t* l) {
