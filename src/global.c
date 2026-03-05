@@ -5,7 +5,7 @@
 
 void run(Global_t* g) {
 	// clear();
-	printf("The length of Lists is now [%d]\n", g->length);
+	// printf("The length of Lists is now [%d]\n", g->length);
 
 	if (g->inList > -1) {
 		dispList(&g->lists[g->inList]);
