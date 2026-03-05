@@ -12,6 +12,7 @@ typedef struct {
 
 // int getSize(List_t* l);
 // void resize(List_t* l);
+void init(List_t* l);
 int badIndex(List_t* l);
 void add(List_t* l, Entry_t* e);
 void del(List_t* l, int i);

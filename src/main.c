@@ -6,6 +6,7 @@ int main(void) {
 	init(&global);
 	// load(&global);
 	while(global.running) {
+		clear();
 		run(&global);
 	}
 	// save(&global);

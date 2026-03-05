@@ -12,6 +12,10 @@
 	// l->entries = en; fix cuz mem stuff
 //}
 
+void init(List_t* l) {
+	l->length = 0;
+}
+
 int badIndex(List_t* l, int i) {
 	return i < 0 || i >= l->length;
 }

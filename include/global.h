@@ -22,6 +22,7 @@ void del(Global_t* g, int i);
 void complete(Global_t* g, int i);
 void move(Global_t* g, int i, int j);
 void dispLists(Global_t* g);
+void quit(Global_t* g);
 void select(Global_t* g, int i);
 void ret(Global_t* g);
 void run(Global_t* g);

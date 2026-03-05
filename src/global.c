@@ -1,26 +1,78 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "global.h"
 
 void run(Global_t* g) {
+	// clear();
+	printf("The length of Lists is now [%d]\n", g->length);
+
 	if (g->inList > -1) {
 		dispList(&g->lists[g->inList]);
 	} else {
 		dispLists(g);
 	}
-	char c;
-	// c = get command char
+
+	printf("Enter command: \n");
+	char c = getchar();
 	
 	// global
 	switch (c) {
+		case 'q':
+			quit(g);
+			break;
+		case 'z':
+			// undo(g);
+			break;
+		case 'y':
+			// redo(g);
+			break;
 	}
 
 	if (g->inList > -1) {
 		// entry commands
 		switch(c) {
+			case 'a':
+				break;
+			case 'd':
+				break;
+			case 'e':
+				break;
+			case 'm':
+				break;
+			case 'r':
+				ret(g);
+				break;
 		}
 	} else {
 		// list commands
 		switch (c) {
+			case 'd': {
+				printf("Enter index to delete: \n");
+				// int i = getchar() - '0' - 1;
+				int i = 0;
+				del(g, i);
+				break;
+			}
+			case 'c':
+				break;
+			case 'm':
+				break;
+			case 'e':
+				break;
+			case 's':
+				break;
+			case 'a': {
+				List_t* l = (List_t*) malloc(sizeof(List_t));
+				// temp
+				init(l);
+				strcpy(l->title, "title");
+				strcpy(l->desc, "desc");
+
+				// make list;
+				add(g, l);
+				break;
+			}		
 		}
 	}
 }
@@ -32,11 +84,12 @@ void init(Global_t* g) {
 }
 
 void dispLists(Global_t* g) {
+	printf("Lists:\n");
 	if (g->length < 1) {
 		printf("[!] No lists found.\n");
 		return;
 	}
-	for (int i = 0; i < g->length; i++) printf("[%d] %s\n", i, g->lists[i].title);
+	for (int i = 0; i < g->length; i++) printf("[%d] %s\n", i + 1, g->lists[i].title);
 }
 
 // int getSize(Global_t* g) {
@@ -55,12 +108,11 @@ int badIndex(Global_t* g, int i) {
 }
 
 void add(Global_t* g, List_t* l) {
-	if (g->length > LISTS_SIZE) {
-		// print err
+	if (g->length < LISTS_SIZE) {
+		g->lists[g->length++] = *l;
 		return;
 	}
-	g->lists[g->length++] = *l;
-	// if (++(g->length) >= getSize(g)) resize(g);
+	// print err
 }
 
 void del(Global_t* g, int i) {
@@ -68,6 +120,7 @@ void del(Global_t* g, int i) {
 		// display err msg
 		return;
 	}
+	// free(&g->lists[i]);
 	for (; i < g->length - 1; g->lists[i] = g->lists[++i]);
 	g->length--;
 }
@@ -89,6 +142,10 @@ void move(Global_t* g, int i, int j) {
 	List_t temp = g->lists[i];
 	g->lists[i] = g->lists[j];
 	g->lists[j] = temp;
+}
+
+void quit(Global_t* g) {
+	g->running = 0;
 }
 
 void select(Global_t* g, int i) {
