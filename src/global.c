@@ -13,7 +13,7 @@ void run(Global_t* g) {
 		dispLists(g);
 	}
 
-	printf("Enter command: \n");
+	printf("Enter command: ");
 	char c = collectChar();
 	
 	// global
@@ -48,28 +48,46 @@ void run(Global_t* g) {
 		// list commands
 		switch (c) {
 			case 'd': {
-				printf("Enter index to delete: \n");
-				// int i = getchar() - '0' - 1;
-				int i = 0;
+				printf("Enter index to delete: ");
+				int i = collectChar() - '0' - 1;
 				del(g, i);
 				break;
 			}
-			case 'c':
+			case 'c': {
+				// printf("Enter index to complete: ");
+				// int i = collectChar() - '0' - 1;
+				// complete(g, i);
 				break;
-			case 'm':
+			}
+			case 'm': {
+				printf("Enter index to move: ");
+				int i = collectChar() - '0' - 1;
+				printf("Enter new index: ");
+				int j = collectChar() - '0' - 1;
+				move(g, i, j);
 				break;
+			}
 			case 'e':
 				break;
-			case 's':
+			case 's': {
+				printf("Enter index to select: ");
+				int i = collectChar() - '0' - 1;
+				select(g, i);
 				break;
+			}
 			case 'a': {
 				List_t* l = (List_t*) malloc(sizeof(List_t));
-				// temp
 				init(l);
-				strcpy(l->title, "title");
-				strcpy(l->desc, "desc");
 
-				// make list;
+				char name[51];
+				printf("Enter list name: ");
+				collectStr(name); 
+				strcpy(l->title, name);
+				char desc[101];
+				printf("Enter list description: ");
+				collectStr(desc);
+				strcpy(l->desc, desc);
+
 				add(g, l);
 				break;
 			}		
@@ -121,7 +139,7 @@ void del(Global_t* g, int i) {
 		return;
 	}
 	// free(&g->lists[i]);
-	for (; i < g->length - 1; g->lists[i] = g->lists[++i]);
+	for (; i < g->length - 1; g->lists[i] = g->lists[i + 1], i++);
 	g->length--;
 }
 
