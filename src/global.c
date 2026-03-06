@@ -79,14 +79,10 @@ void run(Global_t* g) {
 				List_t* l = (List_t*) malloc(sizeof(List_t));
 				init(l);
 
-				char name[51];
 				printf("Enter list name: ");
-				collectStr(name); 
-				strcpy(l->title, name);
-				char desc[101];
+				collectStr(l->title); 
 				printf("Enter list description: ");
-				collectStr(desc);
-				strcpy(l->desc, desc);
+				collectStr(l->desc);
 
 				add(g, l);
 				break;
