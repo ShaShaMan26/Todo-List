@@ -6,48 +6,37 @@ src = ./src
 inc = ./include
 bin = ./bin
 
-build: input.o entry.o list.o global.o main.o
-	$(cc) $(bin)/input.o $(bin)/entry.o $(bin)/list.o $(bin)/global.o $(bin)/main.o -o $(bin)/todo
+build: todo.o global.o main.o
+	$(cc) $(bin)/todo.o $(bin)/global.o $(bin)/main.o -o $(bin)/todo
 
 run:
 	@$(MAKE) build
 	@./bin/todo
 
-dbuild: dinput.o dentry.o dlist.o dglobal.o dmain.o
-	$(cc) $(bin)/dinput.o $(bin)/dentry.o $(bin)/dlist.o $(bin)/dglobal.o $(bin)/dmain.o -o $(bin)/dtodo
+dbuild: dtodo.o dglobal.o dmain.o
+	$(cc) $(bin)/dtodo.o $(bin)/dglobal.o $(bin)/dmain.o -o $(bin)/dtodo
 
 drun:
 	@$(MAKE) dbuild
 	@./bin/dtodo
 
 
-main.o: $(inc)/main.h $(src)/main.c
-	$(cc) $(cflags) $(inc)/main.h $(src)/main.c -o $(bin)/main.o $(ipath)
+main.o: $(src)/main.c
+	$(cc) $(cflags) $(src)/main.c -o $(bin)/main.o $(ipath)
 
 global.o: $(inc)/global.h $(src)/global.c
 	$(cc) $(cflags) $(inc)/global.h $(src)/global.c -o $(bin)/global.o $(ipath)
 
-entry.o: $(inc)/entry.h $(src)/entry.c
-	$(cc) $(cflags) $(inc)/entry.h $(src)/entry.c -o $(bin)/entry.o $(ipath)
+todo.o: $(inc)/todo.h $(src)/todo.c
+	$(cc) $(cflags) $(inc)/todo.h $(src)/todo.c -o $(bin)/todo.o $(ipath)
 
-list.o: $(inc)/list.h $(src)/list.c
-	$(cc) $(cflags) $(inc)/list.h $(src)/list.c -o $(bin)/list.o $(ipath)
 
-input.o: $(inc)/input.h $(src)/input.c
-	$(cc) $(cflags) $(inc)/input.h $(src)/input.c -o $(bin)/input.o $(ipath)
-
-dmain.o: $(inc)/main.h $(src)/main.c
-	$(cc) $(cdflags) $(inc)/main.h $(src)/main.c -o $(bin)/dmain.o $(ipath)
+dmain.o: $(src)/main.c
+	$(cc) $(cdflags) $(src)/main.c -o $(bin)/dmain.o $(ipath)
 
 dglobal.o: $(inc)/global.h $(src)/global.c
 	$(cc) $(cdflags) $(inc)/global.h $(src)/global.c -o $(bin)/dglobal.o $(ipath)
 
-dentry.o: $(inc)/entry.h $(src)/entry.c
-	$(cc) $(cdflags) $(inc)/entry.h $(src)/entry.c -o $(bin)/dentry.o $(ipath)
-
-dlist.o: $(inc)/list.h $(src)/list.c
-	$(cc) $(cdflags) $(inc)/list.h $(src)/list.c -o $(bin)/dlist.o $(ipath)
-
-dinput.o: $(inc)/input.h $(src)/input.c
-	$(cc) $(cdflags) $(inc)/input.h $(src)/input.c -o $(bin)/dinput.o $(ipath)
+dtodo.o: $(inc)/todo.h $(src)/todo.c
+	$(cc) $(cdflags) $(inc)/todo.h $(src)/todo.c -o $(bin)/dtodo.o $(ipath)
 
