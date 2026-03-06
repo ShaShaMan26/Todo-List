@@ -3,6 +3,37 @@
 #include <string.h>
 #include "global.h"
 
+void add(Global_t* g) {
+	List_t* l = (List_t*) malloc(sizeof(List_t));
+	init(l);		
+	printf("Enter list name: ");
+	collectStr(l->title); 
+	printf("Enter list description: ");
+	collectStr(l->desc);
+
+	add(g, l);
+}
+
+void del(Global_t* g) {
+	printf("Enter index to delete: ");
+	int i = collectChar() - '0' - 1;
+	del(g, i);
+}
+
+void move(Global_t* g) {
+	printf("Enter index to move: ");
+	int i = collectChar() - '0' - 1;
+	printf("Enter new index: ");
+	int j = collectChar() - '0' - 1;
+	move(g, i, j);
+}
+
+void select(Global_t* g) {
+	printf("Enter index to select: ");
+	int i = collectChar() - '0' - 1;
+	select(g, i);
+}
+
 void run(Global_t* g) {
 	// clear();
 	// printf("The length of Lists is now [%d]\n", g->length);
@@ -18,6 +49,7 @@ void run(Global_t* g) {
 	
 	// global
 	switch (c) {
+		
 		case 'q':
 			quit(g);
 			break;
@@ -47,46 +79,25 @@ void run(Global_t* g) {
 	} else {
 		// list commands
 		switch (c) {
-			case 'd': {
-				printf("Enter index to delete: ");
-				int i = collectChar() - '0' - 1;
-				del(g, i);
+			case 'a':
+				add(g);
+				break;	
+			case 'd':
+				del(g);
 				break;
-			}
-			case 'c': {
+			case 'c':
 				// printf("Enter index to complete: ");
 				// int i = collectChar() - '0' - 1;
 				// complete(g, i);
 				break;
-			}
-			case 'm': {
-				printf("Enter index to move: ");
-				int i = collectChar() - '0' - 1;
-				printf("Enter new index: ");
-				int j = collectChar() - '0' - 1;
-				move(g, i, j);
+			case 'm':
+				move(g);
 				break;
-			}
 			case 'e':
 				break;
-			case 's': {
-				printf("Enter index to select: ");
-				int i = collectChar() - '0' - 1;
-				select(g, i);
+			case 's':
+				select(g);
 				break;
-			}
-			case 'a': {
-				List_t* l = (List_t*) malloc(sizeof(List_t));
-				init(l);
-
-				printf("Enter list name: ");
-				collectStr(l->title); 
-				printf("Enter list description: ");
-				collectStr(l->desc);
-
-				add(g, l);
-				break;
-			}		
 		}
 	}
 }
