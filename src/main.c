@@ -41,6 +41,26 @@ void move(List_t* l) {
         move(l, i, j);
 }
 
+void edit(List_t* l) {
+	printf("Enter index to edit: ");
+        int i = collectChar() - '0' - 1;
+	Entry_t* e = &l->entries[i];
+	
+	char c;
+	printf("Edit title? (y/n): ");
+	c = collectChar();
+	if (c == 'y') {
+		printf("\tEnter new title: ");
+		collectStr(e->title);
+	}
+	printf("Edit description? (y/n): ");
+	c = collectChar();
+	if (c == 'y') {
+		printf("\tEnter new desc: ");
+		collectStr(e->desc);
+	}
+}
+
 void ret(Todo_t* g) {
         g->inList = -1;
 }
@@ -69,10 +89,31 @@ void move(Todo_t* g) {
         int j = collectChar() - '0' - 1;
         move(g, i, j);
 }
+
 void select(Todo_t* g) {
         printf("Enter index to select: ");
         int i = collectChar() - '0' - 1;
         g->inList = i;
+}
+
+void edit(Todo_t* g) {
+	printf("Enter index to edit: ");
+        int i = collectChar() - '0' - 1;
+	List_t* l = &g->lists[i];
+	
+	char c;
+	printf("Edit title? (y/n): ");
+	c = collectChar();
+	if (c == 'y') {
+		printf("\tEnter new title: ");
+		collectStr(l->title);
+	}
+	printf("Edit description? (y/n): ");
+	c = collectChar();
+	if (c == 'y') {
+		printf("\tEnter new desc: ");
+		collectStr(l->desc);
+	}
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Global~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void quit(Todo_t* g) {
@@ -121,7 +162,8 @@ void run(Todo_t* g) {
                                 move(l);
                                 break;
                         case 'e':
-                                break;
+                                edit(l);
+				break;
                         case 'r':
                                 ret(g);
                                 break;
@@ -144,6 +186,7 @@ void run(Todo_t* g) {
                                 move(g);
                                 break;
                         case 'e':
+				edit(g);
                                 break;
                         case 's':
                                 select(g);
