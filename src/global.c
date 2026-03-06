@@ -3,6 +3,30 @@
 #include <string.h>
 #include "global.h"
 
+void add(List_t* l) {
+	Entry_t* e = (Entry_t*) malloc(sizeof(Entry_t));		
+	printf("Enter entry name: ");
+	collectStr(e->title); 
+	printf("Enter entry description: ");
+	collectStr(e->desc);
+
+	add(l, e);
+}
+
+void del(List_t* l) {
+	printf("Enter index to delete: ");
+	int i = collectChar() - '0' - 1;
+	del(l, i);
+}
+
+void move(List_t* l) {
+	printf("Enter index to move: ");
+	int i = collectChar() - '0' - 1;
+	printf("Enter new index: ");
+	int j = collectChar() - '0' - 1;
+	move(l, i, j);
+}
+
 void add(Global_t* g) {
 	List_t* l = (List_t*) malloc(sizeof(List_t));
 	init(l);		
@@ -62,15 +86,21 @@ void run(Global_t* g) {
 	}
 
 	if (g->inList > -1) {
+		List_t* l = &g->lists[g->inList];
 		// entry commands
 		switch(c) {
 			case 'a':
-				break;
+				add(l);
+				break;	
 			case 'd':
+				del(l);
 				break;
-			case 'e':
+			case 'c':
 				break;
 			case 'm':
+				move(l);
+				break;
+			case 'e':
 				break;
 			case 'r':
 				ret(g);

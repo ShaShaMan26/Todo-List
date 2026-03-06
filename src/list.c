@@ -21,12 +21,11 @@ int badIndex(List_t* l, int i) {
 }
 
 void add(List_t* l, Entry_t* e) {
-	if (l->length > ENTRIES_SIZE) {
-		// print err
+	if (l->length < ENTRIES_SIZE) {
+		l->entries[l->length++] = *e;
 		return;
 	}
-	l->entries[l->length++] = *e;
-	// if (++(l->length) >= getSize(l)) resize(l);
+	// print err
 }
 
 void del(List_t* l, int i) {
@@ -34,7 +33,7 @@ void del(List_t* l, int i) {
 		// display err msg
 		return;
 	}
-	for (; i < l->length - 1; l->entries[i] = l->entries[++i]);
+	for (; i < l->length - 1; l->entries[i] = l->entries[i + 1], i++);
 	l->length--;
 }
 
@@ -53,8 +52,13 @@ void move(List_t* l, int i, int j) {
 		return;
 	}
 	Entry_t temp = l->entries[i];
-	l->entries[i] = l->entries[j];
-	l->entries[j] = temp;
+        if (i < j)
+                for (; i < j; l->entries[i] = l->entries[i+1], i++);
+        else if (i > j)
+                for (; i > j; l->entries[i] = l->entries[i - 1], i--);
+        else
+                return;
+        l->entries[j] = temp;
 }
 
 void dispList(List_t* l) {
@@ -63,7 +67,7 @@ void dispList(List_t* l) {
 		printf("[!] No entries found.\n");
 		return;
 	}
-	for (int i = 0; i < l->length; i++) printf("[%d] %s\n", i, l->entries[i].title);
+	for (int i = 0; i < l->length; i++) printf("[%d] %s\n", i + 1, l->entries[i].title);
 }
 
 void edit(List_t* l) {
