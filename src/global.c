@@ -165,7 +165,12 @@ void move(Global_t* g, int i, int j) {
 		return;
 	}
 	List_t temp = g->lists[i];
-	g->lists[i] = g->lists[j];
+	if (i < j)
+		for (; i < j; g->lists[i] = g->lists[i+1], i++);
+	else if (i > j)
+		for (; i > j; g->lists[i] = g->lists[i - 1], i--);
+	else
+		return;
 	g->lists[j] = temp;
 }
 
