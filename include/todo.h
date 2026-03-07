@@ -15,8 +15,9 @@ typedef struct {
         Entry_t entries[ENTRIES_SIZE];
 } List_t;
 void dispList(List_t*);
+void dispEntries(List_t*);
 void init(List_t*);
-int badIndex(List_t*);
+int badIndex(List_t*, int);
 void add(List_t*, Entry_t*);
 void del(List_t*, int);
 void move(List_t*, int, int);

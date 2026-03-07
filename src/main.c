@@ -41,6 +41,20 @@ void move(List_t* l) {
         move(l, i, j);
 }
 
+void view(List_t* l) {
+	printf("Enter index to view: ");
+	int i = collectChar() - '0' - 1;
+	if (badIndex(l, i)) return;
+
+	clear();
+	dispEntry(&l->entries[i]);
+	
+	printf("\nPress enter to continue...");
+	char c = getchar();
+	while (c != '\n' && c!= EOF);
+	getchar();
+}
+
 void edit(List_t* l) {
 	printf("Enter index to edit: ");
         int i = collectChar() - '0' - 1;
@@ -96,6 +110,20 @@ void select(Todo_t* g) {
         g->inList = i;
 }
 
+void view(Todo_t* g) {
+	printf("Enter index to view: ");
+	int i = collectChar() - '0' - 1;
+	if (badIndex(g, i)) return;
+
+	clear();
+	dispList(&g->lists[i]);
+	
+	printf("\nPress enter to continue...");
+	char c = getchar();
+	while (c != '\n' && c!= EOF);
+	getchar();
+}
+
 void edit(Todo_t* g) {
 	printf("Enter index to edit: ");
         int i = collectChar() - '0' - 1;
@@ -123,7 +151,7 @@ void quit(Todo_t* g) {
 void run(Todo_t* g) {
         // display correct header
 	if (g->inList > -1) {
-                dispList(&g->lists[g->inList]);
+	       	dispEntries(&g->lists[g->inList]);
         } else {
                 dispLists(g);
         }
@@ -167,6 +195,9 @@ void run(Todo_t* g) {
                         case 'r':
                                 ret(g);
                                 break;
+			case 'v':
+				view(l);
+				break;
                 }
         } else {
                 // check list commands
@@ -191,6 +222,9 @@ void run(Todo_t* g) {
                         case 's':
                                 select(g);
                                 break;
+			case 'v':
+				view(g);
+				break;
                 }
         }
 }

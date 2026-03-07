@@ -4,10 +4,6 @@
 #include "todo.h"
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~entry~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void dispEntry(Entry_t* e) {
-        printf("%s\n%s\n", e->title, e->desc);
-}
-
 void edit(Entry_t* e) {
         // query edit name
         // e -> title = input;
@@ -15,6 +11,9 @@ void edit(Entry_t* e) {
         // e -> desc = input;
 }
 
+void dispEntry(Entry_t* e) {
+	printf("%s\n%s\n", e->title, e->desc);
+}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~lists~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void init(List_t* l) {
         l->length = 0;
@@ -56,13 +55,17 @@ void move(List_t* l, int i, int j) {
         l->entries[j] = temp;
 }
 
-void dispList(List_t* l) {
+void dispEntries(List_t* l) {
         printf("%s\n%s\n", l->title, l->desc);
         if (l->length < 1) {
                 printf("[!] No entries found.\n");
                 return;
         }
         for (int i = 0; i < l->length; i++) printf("[%d] %s\n", i + 1, l->entries[i].title);
+}
+
+void dispList(List_t* l) {
+	printf("%s\n%s\n", l->title, l->desc);
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ todo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void init(Todo_t* g) {
