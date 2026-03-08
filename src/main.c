@@ -60,8 +60,11 @@ void edit(List_t* l) {
         int i = collectChar() - '0' - 1;
 	Entry_t* e = &l->entries[i];
 	
+	clear();
+	dispEntry(e);
+	
 	char c;
-	printf("Edit title? (y/n): ");
+	printf("\nEdit title? (y/n): ");
 	c = collectChar();
 	if (c == 'y') {
 		printf("\tEnter new title: ");
@@ -129,8 +132,11 @@ void edit(Todo_t* g) {
         int i = collectChar() - '0' - 1;
 	List_t* l = &g->lists[i];
 	
+	clear();
+	dispList(l);
+
 	char c;
-	printf("Edit title? (y/n): ");
+	printf("\nEdit title? (y/n): ");
 	c = collectChar();
 	if (c == 'y') {
 		printf("\tEnter new title: ");
@@ -151,13 +157,16 @@ void quit(Todo_t* g) {
 void run(Todo_t* g) {
         // display correct header
 	if (g->inList > -1) {
-	       	dispEntries(&g->lists[g->inList]);
+		dispList(&g->lists[g->inList]);
+	       	printf("\n");
+		dispEntries(&g->lists[g->inList]);
         } else {
+		printf("~~~Lists~~~\n\n");
                 dispLists(g);
         }
 
 	// get command
-        printf("Enter command: ");
+        printf("\nEnter command: ");
         char c = collectChar();
         
         // check for global commands

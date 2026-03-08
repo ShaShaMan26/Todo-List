@@ -12,7 +12,7 @@ void edit(Entry_t* e) {
 }
 
 void dispEntry(Entry_t* e) {
-	printf("%s\n%s\n", e->title, e->desc);
+	printf("~~~%s~~~\n\"%s\"\n", e->title, e->desc);
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~lists~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void init(List_t* l) {
@@ -56,7 +56,7 @@ void move(List_t* l, int i, int j) {
 }
 
 void dispEntries(List_t* l) {
-        printf("%s\n%s\n", l->title, l->desc);
+        // printf("%s\n%s\n", l->title, l->desc);
         if (l->length < 1) {
                 printf("[!] No entries found.\n");
                 return;
@@ -65,7 +65,7 @@ void dispEntries(List_t* l) {
 }
 
 void dispList(List_t* l) {
-	printf("%s\n%s\n", l->title, l->desc);
+	printf("~~~%s~~~\n\"%s\"\n", l->title, l->desc);
 }
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ todo ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void init(Todo_t* g) {
@@ -75,7 +75,7 @@ void init(Todo_t* g) {
 }
 
 void dispLists(Todo_t* g) {
-        printf("Lists:\n");
+        // printf("Lists:\n");
         if (g->length < 1) {
                 printf("[!] No lists found.\n");
                 return;
