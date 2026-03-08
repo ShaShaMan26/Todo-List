@@ -8,6 +8,7 @@ bin = ./bin
 
 build: todo.o global.o main.o
 	$(cc) $(bin)/todo.o $(bin)/global.o $(bin)/main.o -o $(bin)/todo
+	@make clean
 
 run:
 	@$(MAKE) build
@@ -15,6 +16,7 @@ run:
 
 dbuild: dtodo.o dglobal.o dmain.o
 	$(cc) $(bin)/dtodo.o $(bin)/dglobal.o $(bin)/dmain.o -o $(bin)/dtodo
+	@make clean
 
 drun:
 	@$(MAKE) dbuild
@@ -40,3 +42,5 @@ dglobal.o: $(inc)/global.h $(src)/global.c
 dtodo.o: $(inc)/todo.h $(src)/todo.c
 	$(cc) $(cdflags) $(inc)/todo.h $(src)/todo.c -o $(bin)/dtodo.o $(ipath)
 
+clean:
+	rm -f $(bin)/*.o
